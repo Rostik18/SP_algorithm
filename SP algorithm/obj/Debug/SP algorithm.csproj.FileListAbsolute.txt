@@ -1,0 +1,7 @@
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\bin\Debug\SP algorithm.exe.config
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\bin\Debug\SP algorithm.exe
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\bin\Debug\SP algorithm.pdb
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\obj\Debug\SP algorithm.csprojAssemblyReference.cache
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\obj\Debug\SP algorithm.csproj.CoreCompileInputs.cache
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\obj\Debug\SP algorithm.exe
+C:\Users\Ростик\source\repos\SP algorithm\SP algorithm\obj\Debug\SP algorithm.pdb
