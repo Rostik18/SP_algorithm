@@ -13,8 +13,7 @@ namespace SP_algorithm
         public double[,] A;
         public double[,] L;
         public double[,] U;
-        public double[] y0;
-        public double[] y1;
+        public double[] y;
         public double[] x;
         public double lambda0 = 0;
         public double lambda1 = 0;
@@ -32,8 +31,7 @@ namespace SP_algorithm
             A = new double[n, n];
             L = new double[n, n];
             U = new double[n, n];
-            y1 = new double[n];
-            y0 = new double[n];
+            y = new double[n];
             x = new double[n];
             string line;
             string[] lineArr;
@@ -51,19 +49,14 @@ namespace SP_algorithm
             file.Close();
 
             for (int i = 0; i < n; i++)
-                y0[i] = y1[i] = 1;
+                y[i] = 1;
 
-            s = Skal_Dob(y1, y1);
+            s = Skal_Dob(y, y);
             norma_y = Math.Sqrt(s);
             for (int i = 0; i < n; i++)
-                x[i] = y1[i] / norma_y;
+                x[i] = y[i] / norma_y;
 
-            Console.Write($"iтерацiя 0: {lambda1:f5} ; ");
-            for (int i = 0; i < n; i++)
-                Console.Write($"{x[i]:f5} ");
-            Console.WriteLine();
-
-            LU_decay();
+            //LU_decay();
         }
 
         void Algorithm()
@@ -75,23 +68,20 @@ namespace SP_algorithm
             {
                 Console.Write($"iтерацiя {++iterationNum}: ");
 
-                //y1 = Matr_na_Vect(A, x);
-                //y1 = LU_Solution(x);
-                y1 = Gauss_Method(A, x);
+                //y = Matr_na_Vect(A, x);
+                //y = LU_Solution(x);
+                y = Gauss_Method(A, x);
 
-                s = Skal_Dob(y1, y1);
-                t = Skal_Dob(y1, x);
+                s = Skal_Dob(y, y);
+                t = Skal_Dob(y, x);
                 norma_y = Math.Sqrt(s);
 
                 for (int i = 0; i < n; i++)
-                {
-                    x[i] = y1[i] / norma_y;
-                    y0[i] = y1[i];
-                }
+                    x[i] = y[i] / norma_y;
 
                 lambda1 = s / t;
 
-                Console.Write($"{lambda1:f5} ; ");
+                Console.Write($"{1/lambda1:f5} ; ");     //Тут потрібно інвертувати бо lambda1 - це власне значення оберненої матриці.
                 for (int i = 0; i < n; i++)
                     Console.Write($"{x[i]:f5} ");
                 Console.WriteLine();
@@ -237,7 +227,13 @@ namespace SP_algorithm
         }
         private void LU_decay()
         {
-            U = A;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    U[i, j] = A[i, j];
+                }
+            }
 
             for (int i = 0; i < n; i++)
                 for (int j = i; j < n; j++)
